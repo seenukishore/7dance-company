@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@theme {
+  /* Colors - 7 Dance Company dark theme */
+  --color-jet-black: #0a0a0a;
+  --color-crimson: #e50914;
+  --color-crimson-light: #ff2d3f;
+  --color-charcoal: #1a1a1a;
+  --color-card-dark: #141414;
+  --color-off-white: #f5f5f5;
+
+  /* Fonts */
+  --font-display: 'Anton', sans-serif;
+  --font-sans: 'Inter', sans-serif;
+}
+
+body {
+  background-color: var(--color-jet-black);
+  color: var(--color-off-white);
+  font-family: var(--font-sans);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  letter-spacing: 0.01em;
+}
