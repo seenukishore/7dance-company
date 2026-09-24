@@ -11,7 +11,8 @@ function Footer() {
             <img
               src={logo}
               alt="7 Dance Company"
-              className="h-10 w-10 object-contain shrink-0"
+              className="h-12 w-12 object-contain shrink-0"
+              style={{ filter: 'brightness(0) invert(1)' }}
             />
             <span className="text-sm font-semibold tracking-[0.28em] uppercase text-off-white">
               7 DANCE CO.
@@ -141,7 +142,7 @@ function Footer() {
             <li>Freestyle</li>
             <li>Bollywood</li>
             <li>Hip Hop</li>
-            <li>Locking & Popping</li>
+            <li>Locking &amp; Popping</li>
             <li>Zumba</li>
           </ul>
         </div>

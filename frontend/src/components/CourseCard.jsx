@@ -1,8 +1,28 @@
 import { motion } from 'framer-motion'
 import { Clock, Users, ArrowUpRight, Star } from 'lucide-react'
 
+// ✅ LOCAL ASSET IMPORTS
+import lockingImg from '../assets/locking.png'
+import breakingImg from '../assets/breaking.jpg'
+import bharatanatyamImg from '../assets/bharatanatyam.png'
+
+export const courseImages = {
+  'Western Dance': 'https://images.unsplash.com/photo-1547153760-18fc86324498?w=800&q=80&auto=format&fit=crop',
+  'Hip Hop': 'https://images.unsplash.com/photo-1518834107812-67b0b7c58434?w=800&q=80&auto=format&fit=crop',
+  'Locking & Popping': lockingImg,
+  'Breaking': breakingImg,
+  'Bollywood': 'https://images.unsplash.com/photo-1524594152303-9fd13543fe6e?w=800&q=80&auto=format&fit=crop',
+  'Freestyle': 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=800&q=80&auto=format&fit=crop',
+  'Zumba': 'https://images.unsplash.com/photo-1527933053326-89d1746b76b9?w=800&q=80&auto=format&fit=crop',
+  'Yoga': 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&q=80&auto=format&fit=crop',
+  'Bharatanatyam': bharatanatyamImg,
+  'Competition Training': 'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=800&q=80&auto=format&fit=crop',
+  'Performance & Choreography': 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&q=80&auto=format&fit=crop',
+}
+
 function CourseCard({ course, index, onSelect, imageUrl }) {
   const isWestern = course.name === 'Western Dance'
+  const resolvedImage = imageUrl || courseImages[course.name] || course.image_url
 
   return (
     <motion.div
@@ -18,7 +38,7 @@ function CourseCard({ course, index, onSelect, imageUrl }) {
       <div className="relative h-60 overflow-hidden bg-black">
         <motion.img
           layoutId={`card-image-${course.id}`}
-          src={imageUrl}
+          src={resolvedImage}
           alt={course.name}
           className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 ${
             isWestern ? 'mix-blend-screen bg-black filter contrast-125' : ''

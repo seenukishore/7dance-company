@@ -7,7 +7,15 @@ function CollaborationsSection() {
   const [collabs, setCollabs] = useState([])
 
   useEffect(() => {
-    getCollaborations().then((data) => setCollabs(data))
+    getCollaborations().then((data) => {
+      if (Array.isArray(data)) {
+        // Remove duplicate collaborations based on 'name' to fix repetition
+        const uniqueCollabs = Array.from(
+          new Map(data.map((item) => [item.name, item])).values()
+        )
+        setCollabs(uniqueCollabs)
+      }
+    }).catch((err) => console.error(err))
   }, [])
 
   return (
@@ -27,7 +35,7 @@ function CollaborationsSection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {collabs.map((c, i) => (
             <motion.div
-              key={c.id}
+              key={c.id || c.name}
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}

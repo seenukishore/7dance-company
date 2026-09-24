@@ -6,7 +6,15 @@ function MilestonesTimeline() {
   const [milestones, setMilestones] = useState([])
 
   useEffect(() => {
-    getMilestones().then((data) => setMilestones(data))
+    getMilestones().then((data) => {
+      if (Array.isArray(data)) {
+        // Remove duplicates based on 'year' to fix the repetition
+        const uniqueMilestones = Array.from(
+          new Map(data.map((item) => [item.year, item])).values()
+        )
+        setMilestones(uniqueMilestones)
+      }
+    }).catch((err) => console.error(err))
   }, [])
 
   return (
@@ -30,7 +38,7 @@ function MilestonesTimeline() {
           <div className="space-y-8 md:space-y-0">
             {milestones.map((m, i) => (
               <motion.div
-                key={m.id}
+                key={m.id || m.year}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}

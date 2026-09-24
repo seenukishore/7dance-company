@@ -46,7 +46,7 @@ function Gallery() {
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-crimson/20 border border-crimson/40 rounded-full mb-3">
             <Sparkles className="w-3.5 h-3.5 text-crimson" />
             <span className="text-[11px] font-semibold tracking-[0.25em] uppercase text-off-white">
-              Moments & Visuals
+              Moments &amp; Visuals
             </span>
           </div>
           <h1 className="font-display text-4xl sm:text-6xl text-white tracking-wide mb-2">
@@ -77,7 +77,7 @@ function Gallery() {
         </div>
       </section>
 
-      {/* 3. SMOOTH POP-LAYOUT GRID (NO OVERLAP / NO DELAY) */}
+      {/* 3. SMOOTH POP-LAYOUT GRID (NO BOTTOM TEXT, CLEAN FULL PHOTO) */}
       <section className="max-w-7xl mx-auto px-6 sm:px-10 pb-28">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           <AnimatePresence mode="popLayout">
@@ -94,7 +94,7 @@ function Gallery() {
                   exit={{ opacity: 0, scale: 0.96 }}
                   transition={{ duration: 0.22, ease: 'easeOut' }}
                   onClick={() => setSelectedItem(item)}
-                  className="group relative h-64 overflow-hidden bg-charcoal border border-white/10 hover:border-crimson cursor-pointer shadow-lg hover:shadow-[0_8px_30px_rgba(229,9,20,0.3)]"
+                  className="group relative h-72 sm:h-80 overflow-hidden bg-charcoal border border-white/10 hover:border-crimson cursor-pointer shadow-lg hover:shadow-[0_8px_30px_rgba(229,9,20,0.3)]"
                 >
                   <img
                     src={imgSrc}
@@ -103,11 +103,11 @@ function Gallery() {
                     loading="lazy"
                   />
 
-                  {/* Dark Vignette Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-80 group-hover:opacity-95 transition-opacity" />
+                  {/* Dark Vignette Overlay on Hover */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
                   {/* Top Badge */}
-                  <span className="absolute top-3 left-3 bg-black/70 backdrop-blur-sm border border-white/10 text-off-white text-[10px] uppercase tracking-widest px-2.5 py-0.5 font-semibold">
+                  <span className="absolute top-3 left-3 bg-black/70 backdrop-blur-sm border border-white/10 text-off-white text-[10px] uppercase tracking-widest px-2.5 py-0.5 font-semibold z-10">
                     {item.category}
                   </span>
 
@@ -116,13 +116,6 @@ function Gallery() {
                     <div className="w-12 h-12 rounded-full bg-crimson/90 text-white flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform">
                       {isVideo ? <Play className="w-5 h-5 fill-white pl-0.5" /> : <ZoomIn className="w-5 h-5" />}
                     </div>
-                  </div>
-
-                  {/* Bottom Caption */}
-                  <div className="absolute bottom-3 left-3 right-3">
-                    <p className="font-display text-sm text-white tracking-wide truncate group-hover:text-crimson transition-colors">
-                      {item.title}
-                    </p>
                   </div>
                 </motion.div>
               )

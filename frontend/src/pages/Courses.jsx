@@ -6,18 +6,31 @@ import CourseCard from '../components/CourseCard'
 import { getCourses } from '../api/courses'
 import { images } from '../data/images'
 
+// ✅ LOCAL ASSET IMPORTS
+import lockingImg from '../assets/locking.png'
+import breakingImg from '../assets/breaking.jpg'
+import bharatanatyamImg from '../assets/bharatanatyam.png'
+
 const courseImagesMap = {
-  'Western Dance': images.programWestern || 'https://www.nicepng.com/png/detail/10-104979_western-dance-png.png',
-  'Freestyle': images.programFreestyle || 'https://blog.tmilly.tv/wp-content/uploads/2023/02/How-to-Freestyle-Dance_-The-Ultimate-Guide-1-1920x1281.jpg',
-  'Bollywood': images.programBollywood || 'https://www.chennaitop10.com/wp-content/uploads/2024/08/Meet-the-Trainer-Bringing-Bollywood-Dance-to-the-Fitness-World-with-Glow-by-POPSUGAR.png',
-  'Hip Hop': images.programHipHop || 'https://img.freepik.com/premium-photo/dynamic-image-young-talented-guy-stylish-clothes-dancing-contemp-hiphop-against-pink-purple_489646-24289.jpg',
-  'Locking & Popping': 'https://images.unsplash.com/photo-1535525153412-5a42439a210d?w=800&q=80&auto=format&fit=crop',
+  'Western Dance': images.programWestern || 'https://images.unsplash.com/photo-1547153760-18fc86324498?w=800&q=80&auto=format&fit=crop',
+  'Hip Hop': images.programHipHop || 'https://images.unsplash.com/photo-1518834107812-67b0b7c58434?w=800&q=80&auto=format&fit=crop',
+  
+  // Local exact assets
+  'Locking & Popping': lockingImg,
+  'Breaking': breakingImg,
+  'Bharatanatyam': bharatanatyamImg,
+
+  'Bollywood': images.programBollywood || 'https://images.unsplash.com/photo-1524594152303-9fd13543fe6e?w=800&q=80&auto=format&fit=crop',
+  'Freestyle': images.programFreestyle || 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=800&q=80&auto=format&fit=crop',
+
+  // Original working images
   'Zumba': 'https://images.unsplash.com/photo-1527933053326-89d1746b76b9?w=800&q=80&auto=format&fit=crop',
+  'Yoga': 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&q=80&auto=format&fit=crop',
   'Competition Training': 'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=800&q=80&auto=format&fit=crop',
   'Performance & Choreography': 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&q=80&auto=format&fit=crop',
 }
 
-const filterTabs = ['All Programs', 'Western', 'Freestyle', 'Bollywood', 'Street', 'Fitness', 'Professional']
+const filterTabs = ['All Programs', 'Western', 'Zumba', 'Yoga', 'Classical']
 
 const stats = [
   { icon: Award, value: '10+', label: 'Years Experience' },
@@ -37,7 +50,6 @@ function Courses() {
       .catch((err) => console.error(err))
   }, [])
 
-  // Close modal on Escape key
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') setSelectedCourse(null)
@@ -71,7 +83,7 @@ function Courses() {
             transition={{ duration: 0.5 }}
             className="text-crimson text-xs tracking-[0.3em] uppercase mb-3 font-semibold"
           >
-            Curriculum & Formats
+            Curriculum &amp; Formats
           </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -127,13 +139,13 @@ function Courses() {
 
         {/* Course Cards Grid */}
         <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {filteredCourses.map((course, i) => (
+          {filteredCourses.map((course, index) => (
             <CourseCard
-              key={course.id}
+              key={course.id || index}
               course={course}
-              index={i}
+              index={index}
               onSelect={setSelectedCourse}
-              imageUrl={courseImagesMap[course.name] || images.programWestern}
+              imageUrl={courseImagesMap[course.name]}
             />
           ))}
         </motion.div>
@@ -145,11 +157,10 @@ function Courses() {
         )}
       </section>
 
-      {/* 4. GSAP FLIP-STYLE SHARED ELEMENT MODAL (Framer Motion layoutId) */}
+      {/* 4. MODAL */}
       <AnimatePresence>
         {selectedCourse && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10">
-            {/* Backdrop Blur Overlay */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -159,13 +170,11 @@ function Courses() {
               className="absolute inset-0 bg-black/80 backdrop-blur-md"
             />
 
-            {/* Expanded Modal Window */}
             <motion.div
               layoutId={`card-container-${selectedCourse.id}`}
               transition={{ type: 'spring', damping: 26, stiffness: 220 }}
               className="relative w-full max-w-3xl max-h-[90vh] bg-charcoal border border-white/20 shadow-[0_20px_60px_rgba(0,0,0,0.95)] z-10 overflow-y-auto flex flex-col"
             >
-              {/* Close Button */}
               <button
                 onClick={() => setSelectedCourse(null)}
                 className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-black/70 border border-white/20 text-white flex items-center justify-center hover:bg-crimson hover:border-crimson transition-all"
@@ -174,7 +183,6 @@ function Courses() {
                 <X className="w-5 h-5" />
               </button>
 
-              {/* Banner Image */}
               <div className="relative h-72 sm:h-80 w-full overflow-hidden bg-black flex-shrink-0">
                 <motion.img
                   layoutId={`card-image-${selectedCourse.id}`}
@@ -202,7 +210,6 @@ function Courses() {
                 </div>
               </div>
 
-              {/* Modal Content Body */}
               <div className="p-6 sm:p-8 space-y-6">
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 py-4 border-y border-white/10">
                   <div>
@@ -241,15 +248,13 @@ function Courses() {
                   </div>
                 )}
 
-                {/* Batch Information */}
                 <div className="bg-black/40 border border-white/10 p-4 flex items-center gap-3">
                   <Calendar className="w-5 h-5 text-crimson flex-shrink-0" />
                   <p className="text-xs sm:text-sm text-off-white/70">
-                    Weekday and Weekend slots available at both Slam Adyar & Slam Perungudi branches.
+                    Weekday and Weekend slots available at our Neelankarai, ECR studio.
                   </p>
                 </div>
 
-                {/* Action CTA */}
                 <div className="pt-2 flex flex-col sm:flex-row gap-4">
                   <Link
                     to="/contact"

@@ -1,30 +1,34 @@
 // Celebrities
-import celeb1 from '../assets/gallery/photos/celebrity-1.webp'
-import celeb2 from '../assets/gallery/photos/celebrity-2.webp'
+import celeb1 from '../assets/gallery/photos/celebrity-1.jpg'
+import celeb2 from '../assets/gallery/photos/celebrity-2.jpg'
 
 // Stage Shows
-import stage1 from '../assets/gallery/photos/stage-1.webp'
-import stage2 from '../assets/gallery/photos/stage-2.webp'
-import stage3 from '../assets/gallery/photos/stage-3.webp'
-import stage4 from '../assets/gallery/photos/stage-4.webp'
-import stage5 from '../assets/gallery/photos/stage-5.webp'
+import stage1 from '../assets/gallery/photos/stage-1.jpg'
+import stage2 from '../assets/gallery/photos/stage-2.jpg'
+import stage3 from '../assets/gallery/photos/stage-3.jpg'
+import stage4 from '../assets/gallery/photos/stage-4.jpg'
+import stage5 from '../assets/gallery/photos/stage-5.jpg'
 
 // Studio Batches
-import studio1 from '../assets/gallery/photos/studio-1.webp'
-import studio2 from '../assets/gallery/photos/studio-2.webp'
-import studio3 from '../assets/gallery/photos/studio-3.webp'
-import studio4 from '../assets/gallery/photos/studio-4.webp'
-import studio5 from '../assets/gallery/photos/studio-5.webp'
-import studio6 from '../assets/gallery/photos/studio-6.webp'
-import studio7 from '../assets/gallery/photos/studio-7.webp'
-import studio8 from '../assets/gallery/photos/studio-8.webp'
+import studio1 from '../assets/gallery/photos/studio-1.jpg'
+import studio2 from '../assets/gallery/photos/studio-2.jpg'
+import studio3 from '../assets/gallery/photos/studio-3.jpg'
+import studio4 from '../assets/gallery/photos/studio-4.jpg'
+import studio5 from '../assets/gallery/photos/studio-5.jpg'
+import studio6 from '../assets/gallery/photos/studio-6.jpg'
+import studio7 from '../assets/gallery/photos/studio-7.jpg'
+import studio8 from '../assets/gallery/photos/studio-8.jpg'
+import studio9 from '../assets/gallery/photos/studio-9.jpg'
+import studio10 from '../assets/gallery/photos/studio-10.jpg'
 
 // Zumba & Fitness
-import zumba1 from '../assets/gallery/photos/zumba-1.webp'
-import zumba2 from '../assets/gallery/photos/zumba-2.webp'
-import zumba3 from '../assets/gallery/photos/zumba-3.webp'
-import zumba4 from '../assets/gallery/photos/zumba-4.webp'
-import zumba5 from '../assets/gallery/photos/zumba-5.webp'
+import zumba1 from '../assets/gallery/photos/zumba-1.jpg'
+import zumba2 from '../assets/gallery/photos/zumba-2.jpg'
+import zumba3 from '../assets/gallery/photos/zumba-3.jpg'
+import zumba4 from '../assets/gallery/photos/zumba-4.jpg'
+import zumba5 from '../assets/gallery/photos/zumba-5.jpg'
+import zumba6 from '../assets/gallery/photos/zumba-6.jpg'
+import zumba7 from '../assets/gallery/photos/zumba-7.jpg'
 
 export const galleryPhotos = [
   // Celebrities
@@ -122,6 +126,18 @@ export const galleryPhotos = [
     category: 'Studio',
     src: studio8,
   },
+  {
+    id: 'studio-9',
+    title: 'Intensive Choreography Session',
+    category: 'Studio',
+    src: studio9,
+  },
+  {
+    id: 'studio-10',
+    title: 'Group Studio Celebration & Training',
+    category: 'Studio',
+    src: studio10,
+  },
 
   // Zumba & Fitness
   {
@@ -153,6 +169,18 @@ export const galleryPhotos = [
     title: 'Corporate Wellness Showcase',
     category: 'Zumba & Fitness',
     src: zumba5,
+  },
+  {
+    id: 'zumba-6',
+    title: 'Fitness Crew Energy Workout',
+    category: 'Zumba & Fitness',
+    src: zumba6,
+  },
+  {
+    id: 'zumba-7',
+    title: 'Zumba & Fitness Batch Fun',
+    category: 'Zumba & Fitness',
+    src: zumba7,
   },
 ]
 

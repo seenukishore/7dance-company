@@ -18,16 +18,27 @@ const grainStyle = {
 }
 
 function SevenEmblem({ reducedMotion }) {
-  const drawTransition = reducedMotion
-    ? { duration: 0 }
-    : { duration: 1.4, ease: cinematicEase } // Slowed from 0.82s to 1.4s
+  const strokeTransition = (i) =>
+    reducedMotion
+      ? { duration: 0 }
+      : { delay: i * 0.15, duration: 0.35, ease: cinematicEase }
+
+  // Coordinates traced from the real logo file (Logo_7dc.PNG) proportions
+  const segments = [
+    "M 0 0 V 193",        // 1. left vertical stub (top-left, doesn't reach bottom)
+    "M 0 0 H 400",         // 2. top horizontal (full width)
+    "M 400 0 V 396",       // 3. right vertical (full height)
+    "M 400 396 H 193",     // 4. bottom stub (right -> left, short)
+    "M 138 117 H 268",     // 5. "7" top bar
+    "M 268 117 L 138 315", // 6. "7" diagonal stroke
+  ]
 
   return (
     <svg
       aria-hidden="true"
-      className="h-auto w-[min(54vw,18rem)] overflow-visible sm:w-[min(34vw,21rem)]"
+      className="h-auto w-[min(50vw,16rem)] overflow-visible sm:w-[min(30vw,19rem)]"
       fill="none"
-      viewBox="0 0 300 220"
+      viewBox="0 0 400 420"
     >
       <defs>
         <linearGradient id="first-splash-metal" x1="0" x2="1" y1="0" y2="1">
@@ -43,51 +54,57 @@ function SevenEmblem({ reducedMotion }) {
           <stop offset="1" stopColor="#ff4b53" />
         </linearGradient>
         <filter id="first-splash-glow" x="-80%" y="-80%" width="260%" height="260%">
-          <feGaussianBlur result="blur" stdDeviation="4.5" />
+          <feGaussianBlur result="blur" stdDeviation="5" />
           <feMerge>
             <feMergeNode in="blur" />
             <feMergeNode in="SourceGraphic" />
           </feMerge>
         </filter>
         <filter id="first-splash-soft-glow" x="-80%" y="-80%" width="260%" height="260%">
-          <feGaussianBlur stdDeviation="11" />
+          <feGaussianBlur stdDeviation="13" />
         </filter>
       </defs>
 
+      {segments.map((d, i) => (
+        <g key={i}>
+          <motion.path
+            d={d}
+            filter="url(#first-splash-soft-glow)"
+            initial={{ opacity: 0, pathLength: 0 }}
+            animate={{ opacity: reducedMotion ? 0.16 : 0.52, pathLength: 1 }}
+            stroke="#e50914"
+            strokeLinecap="square"
+            strokeLinejoin="miter"
+            strokeWidth="10"
+            transition={strokeTransition(i)}
+          />
+          <motion.path
+            d={d}
+            filter="url(#first-splash-glow)"
+            initial={{ opacity: 0, pathLength: 0 }}
+            animate={{ opacity: 1, pathLength: 1 }}
+            stroke="url(#first-splash-crimson)"
+            strokeLinecap="square"
+            strokeLinejoin="miter"
+            strokeWidth="4"
+            transition={strokeTransition(i)}
+          />
+        </g>
+      ))}
+
+      {/* Metallic highlight sweeps across the completed shape */}
       <motion.path
-        d={emblemPath}
-        filter="url(#first-splash-soft-glow)"
-        initial={{ opacity: 0, pathLength: 0 }}
-        animate={{ opacity: reducedMotion ? 0.16 : 0.52, pathLength: 1 }}
-        stroke="#e50914"
-        strokeLinecap="square"
-        strokeLinejoin="miter"
-        strokeWidth="8"
-        transition={drawTransition}
-      />
-      <motion.path
-        d={emblemPath}
-        filter="url(#first-splash-glow)"
-        initial={{ opacity: 0, pathLength: 0 }}
-        animate={{ opacity: 1, pathLength: 1 }}
-        stroke="url(#first-splash-crimson)"
-        strokeLinecap="square"
-        strokeLinejoin="miter"
-        strokeWidth="3"
-        transition={drawTransition}
-      />
-      <motion.path
-        d={emblemPath}
+        d="M 0 0 V 193 M 0 0 H 400 V 396 H 193 M 138 117 H 268 L 138 315"
         initial={{ opacity: 0, pathLength: 0 }}
         animate={{ opacity: 1, pathLength: 1 }}
         stroke="url(#first-splash-metal)"
         strokeLinecap="square"
         strokeLinejoin="miter"
-        strokeWidth="2.15"
+        strokeWidth="2.6"
         transition={
           reducedMotion
             ? { duration: 0 }
-            : { delay: 1.1, duration: 0.95, ease: revealEase } // Smooth second pass
+            : { delay: 1.1, duration: 0.95, ease: revealEase }
         }
       />
     </svg>
@@ -123,7 +140,7 @@ function BrandLockup({ reducedMotion }) {
           reducedMotion ? { duration: 0 } : { delay: 1.3, duration: 1.0, ease: cinematicEase }
         }
       >
-        7 Dance Company
+        Dance Company
       </motion.h1>
       <motion.p
         className="mt-4 text-[0.52rem] font-light uppercase tracking-[0.48em] text-white/35 sm:mt-5 sm:text-[0.62rem]"

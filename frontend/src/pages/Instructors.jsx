@@ -11,10 +11,10 @@ const INSTRUCTORS_DATA = [
     name: 'SEVEN',
     fullName: 'Seven',
     role: 'FOUNDER & LEAD CHOREOGRAPHER',
-    tagline: 'Licensed Zumba Instructor since 2017',
-    clients: 'Honda · Yamaha · Taj Hotels · FC Madras',
+    tagline: 'Licensed Zumba & Yoga Instructor',
+    clients: 'Vijay TV · Zee Tamil · Honda · Hyundai · Taj · Pothys',
     studios: 'Slam Adyar · Slam Perungudi · 7DC Fitness',
-    bio: 'Founder of 7 Dance Company. Specializes in high-energy Zumba, stage choreography, and corporate wellness with a focus on discipline and expressive movement.',
+    bio: 'Driven by passion, powered by movement, and inspired by performance, my dance journey began in 2014. Over the years, I have built a dynamic career through diverse choreographies, prestigious events, and television appearances including Vijay TV, Zee Tamil, Behindwoods, Vendhar TV, Jaya TV, and Pothys. As a licensed Zumba and Yoga instructor, I blend creativity, energy, and fitness, conducting exclusive workshops for leading brands like Honda, Hyundai, Taj, and Pothys.',
     email: 'elumalaiselvaraj0716@gmail.com',
     phone: '+91 90928 64202',
     instagram: 'i_seven_07',
@@ -183,7 +183,7 @@ function Instructors() {
             <p className="text-xs text-white/80 font-medium mb-2">
               {activeItem?.tagline}
             </p>
-            <p className="text-xs sm:text-sm text-off-white/70 line-clamp-2 sm:line-clamp-3 leading-relaxed mb-3">
+            <p className="text-xs sm:text-sm text-off-white/70 line-clamp-3 sm:line-clamp-4 leading-relaxed mb-3">
               {activeItem?.bio}
             </p>
 

@@ -8,7 +8,15 @@ function EventShowcaseList() {
 
   useEffect(() => {
     getEventShowcases()
-      .then((data) => setShows(data))
+      .then((data) => {
+        if (Array.isArray(data)) {
+          // Remove duplicate events based on 'title' to fix repetition
+          const uniqueShows = Array.from(
+            new Map(data.map((item) => [item.title, item])).values()
+          )
+          setShows(uniqueShows)
+        }
+      })
       .catch(() => {})
   }, [])
 
@@ -34,14 +42,14 @@ function EventShowcaseList() {
             </span>
           </div>
           <h2 className="font-display text-4xl sm:text-5xl text-white tracking-wide">
-            Recent Shows & <span className="text-crimson">Productions</span>
+            Recent Shows &amp; <span className="text-crimson">Productions</span>
           </h2>
         </motion.div>
 
         <div className="space-y-4">
           {shows.map((show, i) => (
             <motion.div
-              key={show.id || i}
+              key={show.id || show.title}
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: '-40px' }}
