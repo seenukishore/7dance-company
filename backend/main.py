@@ -1,12 +1,22 @@
+import sys
+import os
+from pathlib import Path
+
+# Add backend directory to sys.path so imports work both locally and in production (Render)
+backend_dir = Path(__file__).resolve().parent
+if str(backend_dir) not in sys.path:
+    sys.path.insert(0, str(backend_dir))
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routers import courses, instructors, milestones, collaborations, testimonials, gallery, events, bookings
 
 app = FastAPI(title="7 Dance Company API")
 
+# Allow local dev + all production frontend origins (Vercel)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
