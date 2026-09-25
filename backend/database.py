@@ -18,3 +18,22 @@ def get_db():
         yield db
     finally:
         db.close()
+
+def init_db():
+    import models
+    # Database tables-ah create pannidum
+    Base.metadata.create_all(bind=engine)
+    
+    db = SessionLocal()
+    try:
+        from models import Course
+        count = db.query(Course).count()
+        # Oruvela courses illena automatic-ah seed data-va run pannum
+        if count == 0:
+            print("Database empty-ah irukku. Auto-seed run aagudhu...")
+            from seed_data import seed_database
+            seed_database(db)
+    except Exception as e:
+        print(f"Auto-seed error: {e}")
+    finally:
+        db.close()
