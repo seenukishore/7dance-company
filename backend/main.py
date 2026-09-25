@@ -10,8 +10,14 @@ if str(backend_dir) not in sys.path:
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routers import courses, instructors, milestones, collaborations, testimonials, gallery, events, bookings
+from database import init_db  # <--- 1. Ingae import pannikonga
 
 app = FastAPI(title="7 Dance Company API")
+
+# Server start aagum pothu automatically database tables & courses seed data-va load pannum
+@app.on_event("startup")
+def on_startup():
+    init_db()  # <--- 2. Ingae startup-la call pannikonga
 
 # Allow local dev + all production frontend origins (Vercel)
 app.add_middleware(
